@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Milmar — Soluciones Energéticas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cyan: #00E5D4;
+      --gray-dark: #2C2C2C;
+      --gray-mid: #6B6B6B;
+      --gray-light: #F8F8F8;
+      --gray-line: #EBEBEB;
+      --white: #FFFFFF;
+      --text: #1A1A1A;
+      --text-mid: #555;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 52px;
+      height: 64px;
+      background: var(--white);
+    }
+
+    /* thin cyan line below nav */
+    nav::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--cyan);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    /* Real Milmar logo: two diagonal slashes + triangle in cyan */
+    .logo-svg { height: 36px; width: auto; }
+
+    .nav-btn {
+      padding: 9px 24px;
+      background: var(--gray-dark);
+      color: var(--white);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .nav-btn:hover { background: #444; }
+
+    /* ─── HERO IMAGE ─── */
+    .hero-img {
+      margin-top: 64px;
+      width: 100%;
+      background: #ffffff;
+    }
+    .hero-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+
+    /* ─── ABOUT ─── */
+    .about-section {
+      padding: 90px 52px;
+      max-width: 860px;
+    }
+    .section-tag {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-tag::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--cyan);
+    }
+    .about-section p {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .about-section p:last-child { margin-bottom: 0; }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      height: 1px;
+      background: var(--gray-line);
+      margin: 0 52px;
+    }
+
+    /* ─── PRODUCTS ─── */
+    .products-section {
+      padding: 90px 52px;
+    }
+    .products-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 60px;
+    }
+
+    /* ── COMBUSTÓLEO ── */
+    .combustoleo-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: var(--gray-light);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 80px;
+    }
+    .combustoleo-img {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      object-fit: cover;
+      display: block;
+    }
+    .combustoleo-content {
+      padding: 56px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      
+    }
+    .product-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 14px;
+    }
+    .product-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+    .product-desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    /* Usos */
+    .usos-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 28px;
+    }
+    .uso-tag {
+      padding: 6px 14px;
+      background: var(--white);
+      border: 1px solid var(--gray-line);
+      border-radius: 2px;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gray-mid);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── ECOFLOW CAROUSEL ── */
+    .ecoflow-section {
+      padding: 0 52px 90px;
+    }
+    .ecoflow-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .ecoflow-header-left {}
+    .ecoflow-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-mid);
+      margin-top: 8px;
+      max-width: 500px;
+      line-height: 1.65;
+    }
+    
+
+    .carousel-track-wrap {
+      overflow: hidden;
+    }
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: grab;
+      user-select: none;
+    }
+    .carousel-track.dragging {
+      transition: none;
+      cursor: grabbing;
+    }
+    .eco-card {
+      flex: 0 0 calc(33.333% - 14px);
+      background: var(--gray-light);
+      border-radius: 4px;
+      overflow: hidden;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.25s;
+    }
+    .eco-card:hover { border-color: var(--cyan); }
+    .eco-card-img {
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      padding: 24px;
+      background: #f8f8f8;
+      display: block;
+    }
+    .eco-card-body {
+      padding: 20px 22px 24px;
+    }
+    .eco-card-brand {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 6px;
+    }
+    .eco-card-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .eco-card-spec {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-mid);
+      line-height: 1.5;
+    }
+
+    /* ─── CTA FINAL ─── */
+    .cta-section {
+      background: var(--gray-light);
+      margin: 0 52px 80px;
+      border-radius: 4px;
+      padding: 72px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      
+    }
+    .cta-left {}
+    .cta-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .cta-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-mid);
+      max-width: 420px;
+      line-height: 1.65;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--gray-line);
+      padding: 40px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--gray-mid);
+    }
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+    .footer-links a {
+      font-size: 12px;
+      color: var(--gray-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cyan); }
+
+    /* ─── CHAT PANEL ─── */
+    .chat-panel {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 299;
+      width: 372px;
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border: 1px solid var(--gray-line);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+      opacity: 0;
+      transform: translateY(16px) scale(0.97);
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .chat-panel.open {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+    }
+    .chat-head {
+      padding: 16px 20px;
+      background: var(--gray-dark);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid var(--cyan);
+    }
+    .chat-head-icon {
+      width: 34px;
+      height: 34px;
+      background: rgba(0,229,212,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .chat-head-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+    .chat-head-sub {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .live-dot {
+      width: 5px; height: 5px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .chat-close-btn {
+      margin-left: auto;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(255,255,255,0.4);
+      line-height: 1;
+      padding: 2px;
+    }
+    .chat-close-btn:hover { color: white; }
+    .chat-close-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    .chat-msgs {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 260px;
+      max-height: 340px;
+      background: #FAFAFA;
+    }
+    .msg { display: flex; flex-direction: column; max-width: 86%; }
+    .msg.user { align-self: flex-end; align-items: flex-end; }
+    .msg.bot { align-self: flex-start; }
+    .bubble {
+      padding: 11px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .msg.bot .bubble {
+      background: var(--white);
+      border: 1px solid var(--gray-line);
+      color: var(--text);
+      border-bottom-left-radius: 2px;
+    }
+    .msg.user .bubble {
+      background: var(--gray-dark);
+      color: white;
+      border-bottom-right-radius: 2px;
+    }
+    .msg-ts { font-size: 10px; color: #bbb; margin-top: 4px; padding: 0 4px; }
+
+    .typing {
+      display: flex; gap: 4px; align-items: center;
+      padding: 12px 15px;
+      background: var(--white);
+      border: 1px solid var(--gray-line);
+      border-radius: 8px;
+      border-bottom-left-radius: 2px;
+      width: fit-content;
+    }
+    .t-dot {
+      width: 6px; height: 6px;
+      background: #ccc; border-radius: 50%;
+      animation: ta 1.2s infinite;
+    }
+    .t-dot:nth-child(2) { animation-delay: 0.2s; }
+    .t-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes ta { 0%,60%,100%{transform:translateY(0);opacity:0.4} 30%{transform:translateY(-5px);opacity:1} }
+
+    .chat-foot {
+      padding: 12px;
+      background: var(--white);
+      border-top: 1px solid var(--gray-line);
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+    .chat-textarea {
+      flex: 1;
+      background: var(--gray-light);
+      border: 1px solid var(--gray-line);
+      border-radius: 5px;
+      padding: 10px 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      resize: none;
+      outline: none;
+      transition: border-color 0.2s;
+      max-height: 100px;
+    }
+    .chat-textarea:focus { border-color: var(--cyan); }
+    .chat-textarea::placeholder { color: #bbb; }
+    .send-btn {
+      width: 40px; height: 40px;
+      background: var(--gray-dark);
+      border: none; border-radius: 5px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .send-btn:hover { background: var(--cyan); }
+    .send-btn svg { width: 15px; height: 15px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ─── REVEAL ─── */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.65s, transform 0.65s;
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 860px) {
+      nav { padding: 0 24px; }
+      .hero-img { height: 380px; }
+      .hero-img-content { left: 24px; bottom: 36px; }
+      .about-section { padding: 64px 24px; }
+      .divider { margin: 0 24px; }
+      .products-section { padding: 64px 24px; }
+      .combustoleo-block { grid-template-columns: 1fr; }
+      .combustoleo-img { min-height: 260px; }
+      .combustoleo-content { padding: 40px 28px; }
+      .ecoflow-section { padding: 0 24px 64px; }
+      .eco-card { flex: 0 0 calc(85% - 10px); }
+      .cta-section { margin: 0 24px 60px; padding: 48px 32px; flex-direction: column; }
+      footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+      .chat-panel { width: calc(100vw - 32px); right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#" class="logo">
+    <img src="./images/logo.png" alt="Milmar" style="height:40px;width:auto;display:block;" />
+  </a>
+  <button class="nav-btn" onclick="openChat()">Cotizar</button>
+</nav>
+
+<!-- ─── HERO IMAGE ─── -->
+<div class="hero-img" id="heroSection">
+  <img
+    src="./images/hero.png"
+    alt="Milmar — Soluciones Energéticas para la Industria"
+    style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
+  />
+</div>
+
+<!-- ─── ABOUT ─── -->
+<div class="about-section reveal">
+  <p>En MILMAR desarrollamos soluciones energéticas para la operación continua de la industria.</p>
+  <p>Combinamos suministro energético y nuevas tecnologías para ayudar a nuestros clientes a operar con mayor eficiencia, continuidad y respaldo.</p>
+  <p>Nuestra visión es evolucionar constantemente hacia un portafolio energético más moderno, práctico y adaptable a las necesidades reales del mercado.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ─── PRODUCTS ─── -->
+<section class="products-section">
+  <h2 class="products-title reveal">Lo que ofrecemos</h2>
+
+  <!-- COMBUSTÓLEO -->
+  <div class="combustoleo-block reveal">
+    <img
+      class="combustoleo-img"
+      src="./images/combustible.png"
+      alt="Combustóleo Industrial — Milmar"
+    />
+    <div class="combustoleo-content">
+      <h3 class="product-name"><span style="color:var(--cyan);">Combustóleo</span><br/>Industrial</h3>
+      <p class="product-desc">Suministramos combustóleo industrial para empresas que requieren continuidad operativa en procesos térmicos como calderas, hornos, secadores y plantas de asfalto.</p>
+      <p class="product-desc">Trabajamos con combustóleo ligero densidad 0.86, diseñado para ofrecer mejor manejo, buena atomización y un desempeño eficiente en combustión.</p>
+      <div class="usos-grid">
+        <span class="uso-tag">Calderas industriales</span>
+        <span class="uso-tag">Hornos y secadores</span>
+        <span class="uso-tag">Plantas de asfalto</span>
+        <span class="uso-tag">Procesos térmicos</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ECOFLOW CAROUSEL -->
+  <div class="ecoflow-section">
+    <div class="ecoflow-header reveal">
+      <div class="ecoflow-header-left">
+        <h3 class="product-name" style="font-family:'Rajdhani',sans-serif; font-size:32px; font-weight:700; text-transform:uppercase; letter-spacing:-0.01em; line-height:1;">Estaciones de Energía<br/>Portátil <span style="color:var(--cyan);">EcoFlow</span></h3>
+        <p class="ecoflow-sub">Contamos con estaciones de energía portátil de la marca EcoFlow para operaciones remotas o como respaldo ante cortes de suministro.</p>
+      </div>
+
+    </div>
+    <div class="carousel-track-wrap" style="position:relative;">
+      <div style="position:absolute;bottom:-28px;left:0;font-size:11px;color:#bbb;letter-spacing:0.08em;display:flex;align-items:center;gap:6px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8" stroke-linecap="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M6 14v-3.5"/><path d="M18 8a2 2 0 0 1 2 2v4a8 8 0 0 1-8 8H9a7 7 0 0 1-7-7v-1"/></svg>
+        Desliza para ver más
+      </div>
+      <div class="carousel-track" id="carouselTrack">
+
+        <!-- RIVER Plus 3 -->
+        <div class="eco-card">
+          <img class="eco-card-img" src="./images/ecoflow-river-plus-3.png" alt="EcoFlow RIVER Plus 3"
+            onerror="this.style.background='#f0f0f0';this.style.padding='40px'"/>
+          <div class="eco-card-body">
+            <div class="eco-card-brand">EcoFlow</div>
+            <div class="eco-card-name">RIVER Plus 3</div>
+            <div class="eco-card-spec">Compacta y portátil · Ideal para uso personal y campo</div>
+          </div>
+        </div>
+
+        <!-- DELTA 3 -->
+        <div class="eco-card">
+          <img class="eco-card-img" src="./images/ecoflow-delta-3.png" alt="EcoFlow DELTA 3"
+            onerror="this.style.background='#f0f0f0';this.style.padding='40px'"/>
+          <div class="eco-card-body">
+            <div class="eco-card-brand">EcoFlow</div>
+            <div class="eco-card-name">DELTA 3</div>
+            <div class="eco-card-spec">Versatilidad para el hogar y trabajo en campo</div>
+          </div>
+        </div>
+
+        <!-- DELTA 2 Max -->
+        <div class="eco-card">
+          <img class="eco-card-img" src="./images/ecoflow-delta-2-max.png" alt="EcoFlow DELTA 2 Max"
+            onerror="this.style.background='#f0f0f0';this.style.padding='40px'"/>
+          <div class="eco-card-body">
+            <div class="eco-card-brand">EcoFlow</div>
+            <div class="eco-card-name">DELTA 2 Max</div>
+            <div class="eco-card-spec">2,048 Wh · 2,400W · Carga completa en 1 hr</div>
+          </div>
+        </div>
+
+        <!-- DELTA Pro -->
+        <div class="eco-card">
+          <img class="eco-card-img" src="./images/ecoflow-delta-pro.png" alt="EcoFlow DELTA Pro"
+            onerror="this.style.background='#f0f0f0';this.style.padding='40px'"/>
+          <div class="eco-card-body">
+            <div class="eco-card-brand">EcoFlow</div>
+            <div class="eco-card-name">DELTA Pro</div>
+            <div class="eco-card-spec">3,600 Wh · 3,600W · Expansible hasta 25kWh</div>
+          </div>
+        </div>
+
+        <!-- DELTA Pro 3 -->
+        <div class="eco-card">
+          <img class="eco-card-img" src="./images/ecoflow-delta-pro-3.png" alt="EcoFlow DELTA Pro 3"
+            onerror="this.style.background='#f0f0f0';this.style.padding='40px'"/>
+          <div class="eco-card-body">
+            <div class="eco-card-brand">EcoFlow</div>
+            <div class="eco-card-name">DELTA Pro 3</div>
+            <div class="eco-card-spec">4,096 Wh · 4,000W · Expansible hasta 48kWh</div>
+          </div>
+        </div>
+
+        <!-- DELTA Pro Ultra -->
+        <div class="eco-card">
+          <img class="eco-card-img" src="./images/ecoflow-delta-pro-ultra.png" alt="EcoFlow DELTA Pro Ultra"
+            onerror="this.style.background='#f0f0f0';this.style.padding='40px'"/>
+          <div class="eco-card-body">
+            <div class="eco-card-brand">EcoFlow</div>
+            <div class="eco-card-name">DELTA Pro Ultra</div>
+            <div class="eco-card-spec">6,144 Wh · 7,200W · Solución industrial de alto rendimiento</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <a href="#" style="text-decoration:none;">
+    <img src="./images/logo.png" alt="Milmar" style="height:32px;width:auto;display:block;" />
+  </a>
+  <p class="footer-copy">© 2025 Milmar — Soluciones Energéticas</p>
+</footer>
+
+<!-- ─── CHAT PANEL ─── -->
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head">
+    <div class="chat-head-icon">
+      <svg width="16" height="14" viewBox="0 0 56 44" fill="none">
+        <path d="M4 40 L16 6 L28 28 L40 6 L52 40" stroke="#00E5D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="chat-head-name">Asesor Milmar</div>
+      <div class="chat-head-sub"><div class="live-dot"></div>En línea</div>
+    </div>
+    <button class="chat-close-btn" onclick="closeChat()">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs"></div>
+  <div class="chat-foot">
+    <textarea class="chat-textarea" id="chatInput" rows="1" placeholder="Escribe tu consulta..." onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+    <button class="send-btn" onclick="sendMsg()">
+      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  // ── Reveal on scroll
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // ── Carousel drag
+  (function() {
+    const track = document.getElementById('carouselTrack');
+    const wrap = track.parentElement;
+    let startX = 0, startPos = 0, pos = 0, isDragging = false;
+
+    function getMaxPos() {
+      const cards = track.querySelectorAll('.eco-card');
+      if (!cards.length) return 0;
+      const cardW = cards[0].offsetWidth + 20;
+      const visible = Math.floor(wrap.offsetWidth / cardW);
+      return -Math.max(0, (cards.length - visible)) * cardW;
+    }
+
+    function clamp(val) { return Math.max(getMaxPos(), Math.min(0, val)); }
+
+    function applyPos(p, animate) {
+      pos = clamp(p);
+      track.style.transition = animate ? 'transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94)' : 'none';
+      track.style.transform = `translateX(${pos}px)`;
+    }
+
+    // Mouse
+    track.addEventListener('mousedown', e => {
+      isDragging = true; startX = e.clientX; startPos = pos;
+      track.classList.add('dragging');
+    });
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      applyPos(startPos + (e.clientX - startX), false);
+    });
+    window.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      track.classList.remove('dragging');
+      // snap to nearest card
+      const cards = track.querySelectorAll('.eco-card');
+      if (cards.length) {
+        const cardW = cards[0].offsetWidth + 20;
+        const snapped = Math.round(pos / cardW) * cardW;
+        applyPos(snapped, true);
+      }
+    });
+
+    // Touch
+    track.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX; startPos = pos;
+      track.classList.add('dragging');
+    }, { passive: true });
+    track.addEventListener('touchmove', e => {
+      applyPos(startPos + (e.touches[0].clientX - startX), false);
+    }, { passive: true });
+    track.addEventListener('touchend', () => {
+      track.classList.remove('dragging');
+      const cards = track.querySelectorAll('.eco-card');
+      if (cards.length) {
+        const cardW = cards[0].offsetWidth + 20;
+        const snapped = Math.round(pos / cardW) * cardW;
+        applyPos(snapped, true);
+      }
+    });
+  })();
+
+  // ── Chat
+  let history = [];
+  const SYSTEM = `Eres un asesor comercial de Milmar, empresa mexicana de soluciones energéticas industriales. Tu objetivo es ayudar al cliente a generar una solicitud de cotización.
+
+SOBRE MILMAR:
+- Distribuye combustóleo industrial (pesado y ligero, densidad 0.86 g/cm³)
+- Vende estaciones de energía portátil marca EcoFlow: DELTA Pro 3, DELTA Pro, DELTA 2 Max, RIVER 2 Pro, PowerOcean
+- Clientes típicos: calderas, hornos, secadores, plantas de asfalto
+- Contacto: 811 238 3162 | gabrielmillan.milmar@gmail.com | milmar.mx
+
+TU FLUJO:
+1. Saluda brevemente
+2. Recaba de forma conversacional: nombre, empresa, teléfono, correo, producto de interés, volumen o modelo, frecuencia de entrega
+3. Cuando tengas los datos clave, presenta un resumen y confirma
+4. Indica que alguien de Milmar se pondrá en contacto pronto
+
+REGLAS:
+- Español mexicano, amigable y profesional
+- Respuestas cortas (máximo 3-4 líneas)
+- Sin formato Markdown (sin *, #, guiones de lista, etc.)
+- Tutea al cliente`;
+
+  function openChat() {
+    document.getElementById('chatPanel').classList.add('open');
+    if (history.length === 0) {
+      setTimeout(() => addBot('¡Hola! Soy el asesor de Milmar. ¿En qué puedo ayudarte hoy?'), 350);
+    }
+    setTimeout(() => document.getElementById('chatInput').focus(), 300);
+  }
+
+  function closeChat() {
+    document.getElementById('chatPanel').classList.remove('open');
+  }
+
+  function now() {
+    return new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function addBot(text) {
+    const c = document.getElementById('chatMsgs');
+    const d = document.createElement('div');
+    d.className = 'msg bot';
+    d.innerHTML = `<div class="bubble">${text}</div><div class="msg-ts">${now()}</div>`;
+    c.appendChild(d); c.scrollTop = c.scrollHeight;
+  }
+
+  function addUser(text) {
+    const c = document.getElementById('chatMsgs');
+    const d = document.createElement('div');
+    d.className = 'msg user';
+    d.innerHTML = `<div class="bubble">${text}</div><div class="msg-ts">${now()}</div>`;
+    c.appendChild(d); c.scrollTop = c.scrollHeight;
+  }
+
+  function showTyping() {
+    const c = document.getElementById('chatMsgs');
+    const d = document.createElement('div');
+    d.className = 'msg bot'; d.id = 'typEl';
+    d.innerHTML = `<div class="typing"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div></div>`;
+    c.appendChild(d); c.scrollTop = c.scrollHeight;
+  }
+
+  function removeTyping() {
+    const t = document.getElementById('typEl');
+    if (t) t.remove();
+  }
+
+  function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+  }
+
+  function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+  }
+
+  async function sendMsg() {
+    const inp = document.getElementById('chatInput');
+    const text = inp.value.trim();
+    if (!text) return;
+    inp.value = ''; inp.style.height = 'auto';
+    addUser(text);
+    history.push({ role: 'user', content: text });
+    showTyping();
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: SYSTEM,
+          messages: history
+        })
+      });
+      const data = await res.json();
+      removeTyping();
+      const reply = data.content?.[0]?.text || 'Hubo un problema. Contáctanos al 811 238 3162.';
+      history.push({ role: 'assistant', content: reply });
+      addBot(reply);
+    } catch {
+      removeTyping();
+      addBot('Tuve un problema de conexión. Puedes contactarnos directo al 811 238 3162 o a gabrielmillan.milmar@gmail.com');
+    }
+  }
+</script>
+</body>
+</html>
